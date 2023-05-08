@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Hosting;
-using Exception = System.Exception;
 
 namespace Pantry.Core;
 

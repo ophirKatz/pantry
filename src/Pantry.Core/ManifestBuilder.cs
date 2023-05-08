@@ -1,6 +1,6 @@
 ﻿namespace Pantry.Core;
 
-public class CatalogContext
+public class ManifestBuilder
 {
     
 }

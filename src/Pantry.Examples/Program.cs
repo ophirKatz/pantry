@@ -2,7 +2,7 @@
 using Pantry.Examples;
 
 var pantry = PantryHost.CreateBuilder()
-    .AddCatalog<DevelopmentEnvironment>()
+    .UseManifest<DevelopmentManifest>()
     .Build();
 
 pantry.Run();

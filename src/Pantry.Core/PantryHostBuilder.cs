@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Pantry.Core;
 
@@ -15,7 +16,13 @@ public class PantryHostBuilder
         });
     }
 
-    public PantryHostBuilder AddCatalog<TCatalog>() where TCatalog : Catalog
+    public PantryHostBuilder ConfigureServices(Action<IServiceCollection> configureServices)
+    {
+        _hostBuilder.ConfigureServices(configureServices);
+        return this;
+    }
+
+    public PantryHostBuilder UseManifest<TCatalog>() where TCatalog : Manifest
     {
         return this;
     }
