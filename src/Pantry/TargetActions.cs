@@ -2,13 +2,13 @@
 
 public class TargetActions
 {
-    private readonly List<ITargetOptions> _targets = new();
+    private readonly List<ITargetNodeDefinitionsBuilder> _targets = new();
 
-    public IReadOnlyList<ITargetOptions> Targets => _targets.AsReadOnly();
+    public IReadOnlyList<ITargetNodeDefinitionsBuilder> Targets => _targets.AsReadOnly();
 
-    public ITargetOptions<TTarget> Target<TTarget>(string name) where TTarget : Target
+    public ITargetOptionsBuilder<TTarget> Target<TTarget>(string name) where TTarget : Target, new()
     {
-        var options = new TargetOptions<TTarget>(name);
+        var options = new TargetOptionsBuilder<TTarget>(name);
         _targets.Add(options);
         return options;
     }

@@ -2,13 +2,13 @@
 
 public static class DownloadOptionsExtensions
 {
-    public static ITargetOptions<Download> FromUrl(this ITargetOptions<Download> options, string url)
+    public static ITargetOptionsBuilder<Download> FromUrl(this ITargetOptionsBuilder<Download> builderBuilder, string url)
     {
-        return options.Configure(x => x.Url = new Uri(url));
+        return builderBuilder.Configure(x => x.Url = new Uri(url));
     }
 
-    public static ITargetOptions<Download> ToFile(this ITargetOptions<Download> options, string filename)
+    public static ITargetOptionsBuilder<Download> ToFile(this ITargetOptionsBuilder<Download> builderBuilder, string filename)
     {
-        return options.Configure(x => x.Destination = filename);
+        return builderBuilder.Configure(x => x.Destination = filename);
     }
 }

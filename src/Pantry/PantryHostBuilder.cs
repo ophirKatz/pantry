@@ -22,8 +22,12 @@ public class PantryHostBuilder
         return this;
     }
 
-    public PantryHostBuilder UseManifest<TCatalog>() where TCatalog : Manifest
+    public PantryHostBuilder UseManifest<TManifest>() where TManifest : Manifest
     {
+        _hostBuilder.ConfigureServices(services =>
+        {
+            services.AddTransient(typeof(Manifest), typeof(TManifest));
+        });
         return this;
     }
 

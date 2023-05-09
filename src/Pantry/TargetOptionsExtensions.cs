@@ -2,9 +2,9 @@
 
 public static class TargetOptionsExtensions
 {
-    public static ITargetOptions<TTarget> WithDescription<TTarget>(this ITargetOptions<TTarget> options, string description)
+    public static ITargetOptionsBuilder<TTarget> WithDescription<TTarget>(this ITargetOptionsBuilder<TTarget> builderBuilder, string description)
         where TTarget : Target
     {
-        return options.Configure(x => x.Description = description);
+        return builderBuilder.Configure(x => x.Description = description);
     }
 }
