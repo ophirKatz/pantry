@@ -1,20 +1,22 @@
-﻿namespace Pantry.Core;
+﻿namespace Pantry;
 
 public class TargetOptions<TTarget> : ITargetOptions<TTarget> where TTarget : Target
 {
-    private readonly List<TargetDescriptor> _runBefore;
-    private readonly List<TargetDescriptor> _runAfter;
+    private readonly string _name;
+    private readonly List<string> _runBefore;
+    private readonly List<string> _runAfter;
     private readonly List<Action<TTarget>> _configurations;
 
-    public TargetOptions()
+    public TargetOptions(string name)
     {
-        _runBefore = new List<TargetDescriptor>();
-        _runAfter = new List<TargetDescriptor>();
+        _name = name;
+        _runBefore = new List<string>();
+        _runAfter = new List<string>();
         _configurations = new List<Action<TTarget>>();
     }
 
-    public IReadOnlyList<TargetDescriptor> RunBefore => _runBefore.AsReadOnly();
-    public IReadOnlyList<TargetDescriptor> RunAfter => _runAfter.AsReadOnly();
+    public IReadOnlyList<string> RunBefore => _runBefore.AsReadOnly();
+    public IReadOnlyList<string> RunAfter => _runAfter.AsReadOnly();
     public IReadOnlyList<Action<TTarget>> Configurations => _configurations.AsReadOnly();
 
     public ITargetOptions<TTarget> Configure(Action<TTarget> action)
@@ -23,15 +25,15 @@ public class TargetOptions<TTarget> : ITargetOptions<TTarget> where TTarget : Ta
         return this;
     }
 
-    public ITargetOrderOptions Before<TOther>(string name)
+    public ITargetOrderOptions Before(string name)
     {
-        _runBefore.Add(new TargetDescriptor(name, typeof(TOther)));
+        _runBefore.Add(name);
         return this;
     }
 
-    public ITargetOrderOptions After<TOther>(string name)
+    public ITargetOrderOptions After(string name)
     {
-        _runAfter.Add(new TargetDescriptor(name, typeof(TOther)));
+        _runAfter.Add(name);
         return this;
     }
 }

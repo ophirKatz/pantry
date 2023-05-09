@@ -10,8 +10,4 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Targets\Downloads\" />
-  </ItemGroup>
-
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Pantry.Core;
+﻿namespace Pantry;
 
 public abstract class Manifest
 {
@@ -7,5 +7,5 @@ public abstract class Manifest
         return true;
     }
 
-    public abstract void Execute(ManifestBuilder builder);
+    public abstract void Execute(TargetActions actions);
 }

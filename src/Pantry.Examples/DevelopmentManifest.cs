@@ -1,6 +1,4 @@
-﻿using Pantry.Core;
-
-namespace Pantry.Examples;
+﻿namespace Pantry.Examples;
 
 /// <summary>
 /// Download and install NodeJs
@@ -16,13 +14,18 @@ namespace Pantry.Examples;
 /// </summary>
 public class DevelopmentManifest : Manifest
 {
-    public override void Execute(ManifestBuilder builder)
+    public override void Execute(TargetActions actions)
     {
-        builder.Download("Download NodeJs")
-            .WithDescription("Downloading NodeJs from the web")
-            .FromUrl("https://nodejs.org/en/download/")
-            .ToFile("~");
+        actions.Download("Download Chocolatey")
+            .FromUrl("https://chocolatey.org/install.ps1")
+            .ToFile("~/install-chocolatey.ps1");
 
-
+        actions.Powershell("Install Chocolatey")
+            .Script("~/install-chocolatey.ps1")
+            .Flavor(PowerShellFlavor.PowerShell)
+            .RequireAdministrator()
+            .Unless("if (Test-Path \"$($env:ProgramData)/chocolatey/choco.exe\") { exit 1 }")
+            //.After<RegistryValue>("Set execution policy")
+            .After("Download Chocolatey");
     }
 }

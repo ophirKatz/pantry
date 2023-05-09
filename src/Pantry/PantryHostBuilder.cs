@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Pantry.Core;
+namespace Pantry;
 
 public class PantryHostBuilder
 {
