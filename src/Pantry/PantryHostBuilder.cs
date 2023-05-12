@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Pantry.Contracts.Logging;
+using Pantry.Core.Instructions;
+using Pantry.Infrastructure.Logging;
 
 namespace Pantry;
 
@@ -9,11 +12,17 @@ public class PantryHostBuilder
 
     public PantryHostBuilder()
     {
-        _hostBuilder = Host.CreateDefaultBuilder();
-        _hostBuilder.ConfigureServices(services =>
-        {
-            return;
-        });
+        _hostBuilder = Host.CreateDefaultBuilder()
+            .ConfigureServices(services =>
+            {
+                services.AddSingleton<Instructions>();
+
+                services.AddSingleton<IInstructionFactory, InstructionFactory>();
+                services.AddSingleton<IInstructionFactory<Download>, DownloadFactory>();
+                // TODO : Register all instruction factories
+
+                services.AddSingleton<IPantryLogger, PantryLogger>();
+            });
     }
 
     public PantryHostBuilder ConfigureServices(Action<IServiceCollection> configureServices)
@@ -22,11 +31,11 @@ public class PantryHostBuilder
         return this;
     }
 
-    public PantryHostBuilder UseManifest<TManifest>() where TManifest : Manifest
+    public PantryHostBuilder UseRecipe<TRecipe>() where TRecipe : Recipe
     {
         _hostBuilder.ConfigureServices(services =>
         {
-            services.AddTransient(typeof(Manifest), typeof(TManifest));
+            services.AddTransient(typeof(Recipe), typeof(TRecipe));
         });
         return this;
     }

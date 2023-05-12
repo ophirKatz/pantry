@@ -1,15 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Pantry.Extensions.Chocolatey\Pantry.Extensions.Chocolatey.csproj" />
-    <ProjectReference Include="..\Pantry.Extensions.VsCode\Pantry.Extensions.VsCode.csproj" />
     <ProjectReference Include="..\Pantry\Pantry.csproj" />
   </ItemGroup>
 

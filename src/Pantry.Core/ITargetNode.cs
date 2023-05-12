@@ -1,7 +1,9 @@
-﻿namespace Pantry;
+﻿using Pantry.Core.Instructions;
+
+namespace Pantry;
 
 public sealed record TargetNodeDefinitions(
-    Target Target,
+    Instruction Instruction,
     IReadOnlyList<string> RunBefore,
     IReadOnlyList<string> RunAfter
 );

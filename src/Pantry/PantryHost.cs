@@ -13,7 +13,7 @@ public class PantryHost
         _host = host;
     }
 
-    public int Run()
+    public int Make()
     {
         try
         {

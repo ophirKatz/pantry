@@ -1,10 +1,14 @@
 ﻿using Pantry;
+using Pantry.Extensions.Chocolatey;
+using Pantry.Extensions.VsCode;
 
 var pantry = PantryHost.CreateBuilder()
-    .UseManifest<DevelopmentManifest>()
+    .UseChocolatey()
+    .UseVsCode()
+    .UseRecipe<IceDevelopmentRecipe>()
     .Build();
 
-pantry.Run();
+pantry.Make();
 
 /// <summary>
 /// Download and install NodeJs
@@ -18,15 +22,12 @@ pantry.Run();
 /// install dotnet sdk
 /// install dotnet tools
 /// </summary>
-public class DevelopmentManifest : Manifest
+public class IceDevelopmentRecipe : Recipe
 {
-    public override void Execute(TargetActions actions)
+    public override void Prepare(Instructions instructions)
     {
-        actions.Download("Download Chocolatey")
-            .FromUrl("https://chocolatey.org/install.ps1")
-            .ToFile("~/install-chocolatey.ps1");
 
-        //actions.PowerShell("Install Chocolatey")
+        //instructions.PowerShell("Install Chocolatey")
         //    .Script("~/install-chocolatey.ps1")
         //    .Flavor(PowerShellFlavor.PowerShell)
         //    .RequireAdministrator()

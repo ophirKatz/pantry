@@ -1,12 +1,12 @@
-﻿namespace Pantry;
+﻿namespace Pantry.Core.Instructions;
 
-public sealed class TargetOptionsBuilder<TTarget> : ITargetOptionsBuilder<TTarget>, ITargetNodeDefinitionsBuilder where TTarget : Target, new()
+public sealed class InstructionOrders<TTarget> : IInstructionOrders, ITargetNodeDefinitionsBuilder where TTarget : Instruction, new()
 {
     private readonly List<string> _runBefore;
     private readonly List<string> _runAfter;
     private readonly List<Action<TTarget>> _configurations;
 
-    public TargetOptionsBuilder(string name)
+    public InstructionOrders(string name)
     {
         _runBefore = new List<string>();
         _runAfter = new List<string>();
@@ -14,12 +14,6 @@ public sealed class TargetOptionsBuilder<TTarget> : ITargetOptionsBuilder<TTarge
         {
             target => target.Name = name
         };
-    }
-
-    public ITargetOptionsBuilder<TTarget> Configure(Action<TTarget> action)
-    {
-        _configurations.Add(action);
-        return this;
     }
 
     public ITargetOrderBuilder Before(string name)

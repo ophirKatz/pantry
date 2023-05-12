@@ -1,6 +1,8 @@
-﻿namespace Pantry;
+﻿using Pantry.Core.Instructions;
 
-public sealed class PowerShell : Target
+namespace Pantry;
+
+public sealed class PowerShell : Instruction
 {
     public PowerShell(string name) : base(name)
     {

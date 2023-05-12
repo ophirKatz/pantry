@@ -1,9 +1,11 @@
-﻿namespace Pantry;
+﻿using Pantry.Core.Instructions;
+
+namespace Pantry;
 
 public static class TargetOptionsExtensions
 {
-    public static ITargetOptionsBuilder<TTarget> WithDescription<TTarget>(this ITargetOptionsBuilder<TTarget> builderBuilder, string description)
-        where TTarget : Target
+    public static IInstructionOrders<TTarget> WithDescription<TTarget>(this IInstructionOrders<TTarget> builderBuilder, string description)
+        where TTarget : Instruction
     {
         return builderBuilder.Configure(x => x.Description = description);
     }

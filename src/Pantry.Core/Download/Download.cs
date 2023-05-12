@@ -1,10 +1,11 @@
-﻿namespace Pantry;
+﻿using Pantry.Core.Instructions;
+using Spectre.IO;
+using Path = Spectre.IO.Path;
 
-public sealed class Download : Target
+namespace Pantry;
+
+public sealed class Download : Instruction
 {
-    public Uri? Url { get; set; }
-    public string? Destination { get; set; }
-
     public Download(string name) : base(name)
     {
         if (Uri.TryCreate(name, UriKind.Absolute, out var result))
@@ -12,4 +13,16 @@ public sealed class Download : Target
             Url = result;
         }
     }
+
+    internal Uri? Url { get; set; }
+    internal Path? Destination { get; set; }
+
+    public void FromUrl(string url)
+    {
+        if (!Uri.TryCreate(url, UriKind.Absolute, out var result)) return;
+        Url = result;
+    }
+
+    public void ToFile(FilePath path) => Destination = path;
+    public void ToDirectory(DirectoryPath path) => Destination = path;
 }
