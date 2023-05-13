@@ -1,6 +1,4 @@
-﻿using Pantry.Core.Instructions;
-
-namespace Pantry;
+﻿namespace Pantry;
 
 public class Instructions
 {
@@ -15,9 +13,9 @@ public class Instructions
 
     public IReadOnlyList<InstructionDescriptor> InstructionDescriptors => _descriptors.AsReadOnly();
 
-    public IInstructionOrders AddInstruction(string name, Action<Download> optionsBuildAction)
+    public IInstructionOrders AddInstruction(string name, Action<Download.Download> optionsBuildAction)
     {
-        var instruction = _instructionFactory.Create<Download>(name);
+        var instruction = _instructionFactory.Create<Download.Download>(name);
         optionsBuildAction(instruction);
         var descriptor = new InstructionDescriptor(instruction);
         _descriptors.Add(descriptor);

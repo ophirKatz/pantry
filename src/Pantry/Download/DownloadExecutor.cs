@@ -1,13 +1,13 @@
-﻿using Pantry.Contracts.Environment;
+﻿using System.Text.RegularExpressions;
+using Pantry.Contracts.Environment;
 using Pantry.Contracts.FileSystem;
 using Pantry.Contracts.Logging;
-using Pantry.Core.Execution;
+using Pantry.Execution;
 using Spectre.IO;
-using System.Text.RegularExpressions;
-using ExecutionContext = Pantry.Core.Execution.ExecutionContext;
+using ExecutionContext = Pantry.Execution.ExecutionContext;
 using Path = Spectre.IO.Path;
 
-namespace Pantry;
+namespace Pantry.Download;
 
 public class DownloadExecutor : IInstructionExecutor<Download>
 {

@@ -1,7 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Pantry.Contracts.Environment;
+using Pantry.Contracts.FileSystem;
 using Pantry.Contracts.Logging;
-using Pantry.Core.Instructions;
+using Pantry.Download;
+using Pantry.Execution;
+using Pantry.Infrastructure.Environment;
+using Pantry.Infrastructure.FileSystem;
 using Pantry.Infrastructure.Logging;
 
 namespace Pantry;
@@ -18,10 +23,16 @@ public class PantryHostBuilder
                 services.AddSingleton<Instructions>();
 
                 services.AddSingleton<IInstructionFactory, InstructionFactory>();
-                services.AddSingleton<IInstructionFactory<Download>, DownloadFactory>();
+                services.AddSingleton<IInstructionFactory<Download.Download>, DownloadFactory>();
                 // TODO : Register all instruction factories
 
+                services.AddTransient<IInstructionExecutor<Download.Download>, DownloadExecutor>();
+
                 services.AddSingleton<IPantryLogger, PantryLogger>();
+                services.AddSingleton<IPantryFileSystem, PantryFileSystem>();
+                services.AddSingleton<IPantryEnvironment, PantryEnvironment>();
+
+                services.AddSingleton<AggregateRecipe>();
             });
     }
 

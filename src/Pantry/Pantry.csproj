@@ -11,8 +11,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Pantry.Core\Pantry.Core.csproj" />
-	  <ProjectReference Include="..\Pantry.Infrastructure\Pantry.Infrastructure.csproj" />
+		<!--<ProjectReference Include="..\Pantry.Core\Pantry.Core.csproj" />-->
+		<ProjectReference Include="..\Pantry.Infrastructure\Pantry.Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>
