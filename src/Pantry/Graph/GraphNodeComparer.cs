@@ -1,15 +1,15 @@
 ﻿namespace Pantry.Graph;
 
-internal class InstructionComparer : IEqualityComparer<Instruction>
+internal class GraphNodeComparer : IEqualityComparer<GraphNode>
 {
     private readonly IEqualityComparer<string> _stringComparer;
 
-    public InstructionComparer()
+    public GraphNodeComparer()
     {
         _stringComparer = StringComparer.OrdinalIgnoreCase;
     }
 
-    public bool Equals(Instruction? x, Instruction? y)
+    public bool Equals(GraphNode? x, GraphNode? y)
     {
         if (x == null && y == null)
         {
@@ -24,5 +24,5 @@ internal class InstructionComparer : IEqualityComparer<Instruction>
         return _stringComparer.Equals(x.Name, y.Name);
     }
 
-    public int GetHashCode(Instruction obj) => HashCode.Combine(obj.Name);
+    public int GetHashCode(GraphNode obj) => HashCode.Combine(obj.Name);
 }

@@ -1,3 +1,3 @@
 ﻿namespace Pantry.Graph;
 
-internal record GraphEdge(Instruction From, Instruction To);
+internal record GraphEdge(GraphNode From, GraphNode To);

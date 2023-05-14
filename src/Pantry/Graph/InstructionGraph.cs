@@ -21,19 +21,19 @@ internal class InstructionGraph
         return graph;
     }
 
-    private readonly IEqualityComparer<Instruction> _comparer;
+    private readonly IEqualityComparer<GraphNode> _comparer;
 
     private InstructionGraph()
     {
-        _comparer = new InstructionComparer();
-        Nodes = new HashSet<Instruction>();
+        _comparer = new GraphNodeComparer();
+        Nodes = new HashSet<GraphNode>();
         Edges = new HashSet<GraphEdge>();
     }
 
-    public HashSet<Instruction> Nodes { get; }
+    public HashSet<GraphNode> Nodes { get; }
     public HashSet<GraphEdge> Edges { get; }
 
-    private void Connect(Instruction from, Instruction to)
+    internal void Connect(GraphNode from, GraphNode to)
     {
         if (from == null)
         {
